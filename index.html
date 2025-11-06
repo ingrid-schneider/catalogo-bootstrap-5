@@ -10,7 +10,7 @@
     <link href="style.css" rel="stylesheet">
     <script src="script.js" defer="defer"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -53,7 +53,7 @@
         </div>
     </nav>
     
-    <div class="container mt-5">
+    <div class="container mt-5 flex-grow-1">
         <h1 class="mb-4 text-center">Destaque de Mês</h1>
         <div class="row" id="catalogo-container">
             
@@ -67,7 +67,7 @@
                         <p class="card-text flex-grow-1">Descrição curta do produto ou item do catálogo</p>
                     </div>
                     <div class="card-footer bg-light border-top-0 d-grid">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detalheModal">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detalheModal">
                             <i class="bi bi-search"></i> Ver detalhes
                         </button>
                     </div>
@@ -84,7 +84,7 @@
                         <p class="card-text flex-grow-1">Um item feito à mão com detalhes especiais e muito carinho.</p>
                     </div>
                     <div class="card-footer bg-light border-top-0 d-grid">
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalheModal">
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#detalheModal">
                             <i class="bi bi-search"></i> Ver detalhes
                         </button>
                     </div>
@@ -101,7 +101,7 @@
                         <p class="card-text flex-grow-1">Terceiro item de destaque</p>
                     </div>
                     <div class="card-footer bg-light border-top-0 d-grid">
-                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#detalheModal">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#detalheModal">
                             <i class="bi bi-search"></i> Ver detalhes
                         </button>
                     </div>
@@ -118,7 +118,7 @@
                         <p class="card-text flex-grow-1">Quarto de destaque</p>
                     </div>
                     <div class="card-footer bg-light border-top-0 d-grid">
-                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#detalheModal">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#detalheModal">
                             <i class="bi bi-search"></i> Ver detalhes
                         </button>
                     </div>
@@ -127,6 +127,28 @@
             
         </div> <!-- .row -->
     </div> <!-- .container -->
+    
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Catálogo de Ensino Médio. Desenvolvido com Bootstrap 5.</p>
+    </footer>
+    
+    <div class="modal fade" id="detalheModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Detalhes do Item</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
