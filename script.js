@@ -84,19 +84,58 @@ modalElement.addEventListener('show.bs.modal', function (event){
     }
 });
 
+
+// 2. Ouvinte para a funcionalidade de busca (simples)
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
-const item = document.querySelector('.item-catalogo');
+const items = document.querySelectorAll('.item-catalogo');
 
 function executarPesquisa(event){
+    // Previne o envio do formulário para os servidor (back-end)
+    event.preventDefault();
+    // Obtém o valor do campo de busca em letras minúsculas (.toLoweCase())
+    const query = searchInput.value.toLowerCase().trim();
+    
+    // Para cada item do catálogo (quatro itens)
+    items.forEach(item => {
+        // Obtém o título e o nome da categoria do item atual em letras minúsculas 
+        const title = item.querySelector('.card-title').textContent.toLowerCase();
+        const category = item.getAttribute('data-categoria').toLowerCase();
+        
+        if (title.includes(query) || category.includes(query) || query === "") {
+            item.style.display = 'block'; // Mostra o item
+        } else {
+            item.style.display = 'none'; // Esconde o item
+        }
+    });
     
 }
 
 searchButton.addEventListener('click', executarPesquisa);
 searchInput.addEventListener('keyup',(event) => {
     if (event.key === 'Enter') {
-        executaePesquisa(event);
-    } else if (searchInput.ariaValueMax.trim() === "") {
         executarPesquisa(event);
+    } else if (searchInput.value.trim() === "") {
+        executarPesquisa(event);
+    }
+});
+
+items.forEach((card, index) => {
+    const img = card.querySelector('img');
+    const title = card.querySelector('.card-title');
+    const category = card.querySelectorAll('.card-text') [0];
+    const description = card.querySelectorAll('.card-text') [1];
+    
+    const item = CATALOG_ITEMS.find(i => i.id === (index + 1));
+    
+    
+    if (item) {
+        img.src = img.src.replace(/\?text=(.*)/, "?text=" + item.categoria.toUpperCase());
+        
+        title.textContent = item.titulo;
+        
+        category.textContent = "Categoria: " + item.categoria;
+        description.textContent = item.detalhes;
+        
     }
 });
