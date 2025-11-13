@@ -139,3 +139,33 @@ items.forEach((card, index) => {
         
     }
 });
+
+const CART_STORAGE_KEY = 'shopping_cart';
+
+function obterCarrinhoDoNavegador() {
+    // Tente ler o cookie do navegador
+    try {
+        const cookie = localStorage.getItem(CART_STORAGE_KEY);
+        if (cookie) {
+            return JSON.parse(cookie);
+        }
+    } catch (e) {
+        console.error("Falha ao ler o cookie do armazenamento local.");
+    }
+    return[];
+}
+
+function salvarCookieCarrinho(itensCarrinho){
+    try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(itensCarrinho));
+    } catch (e) {
+        console.error("ERRO: Falha ao salvar carrinho no navegador. Erro:", e);
+    }
+}
+
+function adicionarItemCarrinho(itemId) {
+    const carrinho = obterCarrinhoDoNavegador();
+    carrinho.push(itemId);
+    salvarCookieCarrinho();
+    atualizarContadorCarrinho();
+}
