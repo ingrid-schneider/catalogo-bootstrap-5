@@ -77,6 +77,7 @@ modalElement.addEventListener('show.bs.modal', function (event){
         modalBody.innerHTML = detailsHTML;
         
         modalAction.onclick = () => {
+            adicionarItemCarrinho(item.id);
             console.log(`Ação: Item '${item.titulo}' (ID: ${item.id}) adiciona ao carrinho.`);
             const bsModal = bootstrap.Modal.getInstance(modalElement);
             if(bsModal) bsModal.hide();
@@ -163,9 +164,48 @@ function salvarCookieCarrinho(itensCarrinho){
     }
 }
 
+function atualizarContadorCarrinho() {
+    const carrinho = obterCarrinhoDoNavegador();
+    const carrinhoBadge = document.getElementById("cart-count");
+
+    if (carrinhoBadge) {
+        carrinhoBadge.textContent = carrinho.length;
+
+        if (carrinho.length > 0) {
+            carrinhoBadge.classList.remove('d-none');
+        } else {
+            carrinhoBadge.classList.add('d-none');
+        }
+    }
+}
+
 function adicionarItemCarrinho(itemId) {
     const carrinho = obterCarrinhoDoNavegador();
     carrinho.push(itemId);
-    salvarCookieCarrinho();
+    salvarCookieCarrinho(carrinho);
     atualizarContadorCarrinho();
 }
+
+atualizarContadorCarrinho();
+
+const carrinho_btn = document.getElementById("cart-button");
+
+carrinho_btn.addEventListener("click", function() {
+    const carrinho_secao = document.getElementById("cart-section");
+    carrinho_secao.classList.toggle("d-none");
+
+    if (carrinho_secao.classList.contains("d-none")) {
+        return;
+    }
+
+    const carrinho_recibo = document.getElementById("cart-list");
+    carrinho_recibo.innerHTML = "";
+
+    const itensCarrinho = obterCarrinhoDoNavegador();
+    itensCarrinho.forEach(itemCarrinho => {
+        const li = document.createElement("li");
+        li.innerHTML = itemCarrinho;
+        
+        carrinho_recibo.appendChild(li);
+    });
+});

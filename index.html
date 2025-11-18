@@ -20,7 +20,7 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item active">
                         <a class="nav-link active" href="#">Início <span class="sr-only"></span></a>
                     </li>
@@ -45,10 +45,19 @@
                         <a class="nav-link disabled" href="#">Desabilitado</a>
                     </li>
                 </ul>
-                <form class="d-flex form-inline my-2 my-lg-0 ms-auto">
-                    <input id="search-input" class="form-control me-2" type="search" placeholder="Buscar item" aria-label="Buscar">
-                    <button id="search-button" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-light me-4 position-relative" id="cart-button" title="Ver carrinho">
+                        <i class="bi bi-cart4 fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cart-count">
+                            0
+                            <span class="visually-hidden">Itens no carrinho</span>
+                        </span>
+                    </button>
+                    <form class="d-flex" role="search">
+                        <input id="search-input" class="form-control me-2" type="search" placeholder="Buscar item" aria-label="Buscar">
+                        <button id="search-button" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -126,6 +135,18 @@
             </div> <!-- Livro 4 -->
             
         </div> <!-- .row -->
+
+        <div class="row" id="cart-section">
+            <h1 class="mb-4 text-center"><i class="bi bi-cart4"></i> Meu carrinho de Compras</h1>
+            <ul class="list-group mb-4 shadow-sm" id="cart-list">
+
+
+            </ul>
+            <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3 shadow-sm">
+                <h5 class="mb-0">Total da Compra:</h5>
+                <h3 class="mb-0 text-primary fw-bold" id="cart-total"></h3>
+            </div>
+        </div>
     </div> <!-- .container -->
     
     <footer class="bg-dark text-white text-center py-3 mt-5">
