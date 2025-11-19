@@ -40,6 +40,9 @@ const CATALOG_ITEMS = [
         comprimento: "50cm"
     }
 ];
+
+const formatCurrency = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
+
 /**
 * Adiciona listeners aos botões "Ver Destalhes" para popular o modal dinamicamente.
 */
@@ -202,9 +205,17 @@ carrinho_btn.addEventListener("click", function() {
     carrinho_recibo.innerHTML = "";
 
     const itensCarrinho = obterCarrinhoDoNavegador();
-    itensCarrinho.forEach(itemCarrinho => {
+    itensCarrinho.forEach(itemId => {
+        const item = CATALOG_ITEMS.find(i => i.id === itemId);
+        
         const li = document.createElement("li");
-        li.innerHTML = itemCarrinho;
+        li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        li.innerHTML = `
+            <div>
+                <h6 class="mb-1">${item.titulo}>/h6>
+            </div>
+            <span class="fw-bold text-success">${formatCurrency(item.preco)}</span>
+        `;
         
         carrinho_recibo.appendChild(li);
     });
